@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, Play } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
 
 
 //  “Dark Neural Lab” (Best for a premium tech feel)
@@ -19,6 +20,7 @@ import { ChevronRight, Play } from 'lucide-react';
 
 const Hero = () => {
 
+  const navigate = useNavigate();
 
 
   const cubeRef = useRef(null);
@@ -104,7 +106,9 @@ const Hero = () => {
           ))}
         </div>
 
-        <button className=" bg-[#FF5800] hover:bg-[#e64f00] text-black text-xs font-bold px-6 py-2.5 rounded-sm uppercase tracking-widest transition-all">
+        <button 
+         onClick={() => navigate('/solve')}
+        className=" bg-[#FF5800] hover:bg-[#e64f00] text-black text-xs font-bold px-6 py-2.5 rounded-sm uppercase tracking-widest transition-all">
           Solve Now
         </button>
       </nav>
