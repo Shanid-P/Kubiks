@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+:root {
+  font-family: 'Poppins', system-ui, sans-serif;
+}
+
+#heroCube canvas {
+  background-color: transparent !important;
+}
