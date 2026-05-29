@@ -12,9 +12,9 @@ self.onmessage = (e) => {
       initialized = true;
     }
 
-    const cube = new Cube();
+    // const cube = new Cube();
 
-    cube = Cube.fromString(state);
+    const cube = Cube.fromString(state);
 
     const SOLVED_STATE =
   "UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB";

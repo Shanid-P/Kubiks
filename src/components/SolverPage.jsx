@@ -12,12 +12,12 @@ import { TwistyPlayer } from "cubing/twisty";
 
 import CubePlayer from "./CubePlayer";
 
-import Cube from "cubejs";
+// import Cube from "cubejs";
 
 
 
 
-let solverInitialized = false;
+// let solverInitialized = false;
 
 // const state =
 // "UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB";
@@ -575,7 +575,7 @@ function SolverPage() {
   useEffect(() => {
 
     workerRef.current = new Worker(
-      new URL("CubeWorker.js", import.meta.url),
+      new URL("./CubeWorker.js", import.meta.url),
       { type: "module" }
     );
 
