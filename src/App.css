@@ -1,4 +1,4 @@
-.counter {
+/* .counter {
   font-size: 16px;
   padding: 5px 10px;
   border-radius: 5px;
@@ -15,8 +15,12 @@
     outline: 2px solid var(--accent);
     outline-offset: 2px;
   }
-}
-
+} */
+ body{
+  overflow-x: hidden;
+  /* box-sizing: border-box; */
+ }
+/* 
 .hero {
   position: relative;
 
@@ -159,9 +163,9 @@
   @media (max-width: 1024px) {
     height: 48px;
   }
-}
+} */
 
-.ticks {
+/* .ticks {
   position: relative;
   width: 100%;
 
@@ -181,30 +185,26 @@
     right: 0;
     border-right-color: var(--border);
   }
-}
+} */
 
 
 
 
  .cube {
-      /* width: 100%;
-      height: 100%;
-      position: relative;
-      transform-style: preserve-3d; */
-      /* animation: flipCube 12s infinite ease-in-out; */
+   
     }
 
-    /* Pause animation on hover */
+   
     .scene:hover .cube {
       animation-play-state: paused;
     }
 
-    /* 3. Common styles for all faces */
+    
     .face {
       position: absolute;
       width: 200px;
       height: 200px;
-      /* border: 2px solid rgba(255, 255, 255, 0.8); */
+      
       display: flex;
       justify-content: center;
       align-items: center;
@@ -213,25 +213,79 @@
       color: white;
       text-transform: uppercase;
       box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.4);
-      backface-visibility: visible; /* Keeps inner walls visible */
+      backface-visibility: visible; 
     }
+  
+    .front  { transform: rotateY(  0deg) translateZ(100px); background: rgba(239, 68, 68, 0.8); }  
+    .back   { transform: rotateY(180deg) translateZ(100px); background: rgba(59, 130, 246, 0.8); } 
+    .right  { transform: rotateY( 90deg) translateZ(100px); background: rgba(16, 185, 129, 0.8); } 
+    .left   { transform: rotateY(-90deg) translateZ(100px); background: rgba(245, 158, 11, 0.8); } 
+    .top    { transform: rotateX( 90deg) translateZ(100px); background: rgba(139, 92, 246, 0.8); } 
+    .bottom { transform: rotateX(-90deg) translateZ(100px); background: rgba(236, 72, 153, 0.8); } 
 
-    /* 4. Position each face in 3D space (moved out by half the cube's size: 100px) */
-    .front  { transform: rotateY(  0deg) translateZ(100px); background: rgba(239, 68, 68, 0.8); }  /* Red */
-    .back   { transform: rotateY(180deg) translateZ(100px); background: rgba(59, 130, 246, 0.8); } /* Blue */
-    .right  { transform: rotateY( 90deg) translateZ(100px); background: rgba(16, 185, 129, 0.8); } /* Green */
-    .left   { transform: rotateY(-90deg) translateZ(100px); background: rgba(245, 158, 11, 0.8); } /* Orange */
-    .top    { transform: rotateX( 90deg) translateZ(100px); background: rgba(139, 92, 246, 0.8); } /* Purple */
-    .bottom { transform: rotateX(-90deg) translateZ(100px); background: rgba(236, 72, 153, 0.8); } /* Pink */
 
-    /* 5. The continuous flipping animation */
-    /* @keyframes flipCube {
-      0%   { transform: rotateX(0deg) rotateY(0deg); }
-      16%  { transform: rotateX(0deg) rotateY(-90deg); }    
-      33%  { transform: rotateX(0deg) rotateY(-180deg); }   
-      50%  { transform: rotateX(0deg) rotateY(-270deg); }   
-      66%  { transform: rotateX(-90deg) rotateY(-360deg); }  
-      83%  { transform: rotateX(90deg) rotateY(-360deg); }  
-      100% { transform: rotateX(0deg) rotateY(0deg); }     
-    } */
 
+ /* .face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+}
+
+.front  { transform: rotateY(0deg) translateZ(100px); }
+.back   { transform: rotateY(180deg) translateZ(100px); }
+.right  { transform: rotateY(90deg) translateZ(100px); }
+.left   { transform: rotateY(-90deg) translateZ(100px); }
+.top    { transform: rotateX(90deg) translateZ(100px); }
+.bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+@media (max-width: 768px) {
+  .face {
+    width: 160px;
+    height: 160px;
+  }
+
+  .front  { transform: rotateY(0deg) translateZ(80px); }
+  .back   { transform: rotateY(180deg) translateZ(80px); }
+  .right  { transform: rotateY(90deg) translateZ(80px); }
+  .left   { transform: rotateY(-90deg) translateZ(80px); }
+  .top    { transform: rotateX(90deg) translateZ(80px); }
+  .bottom { transform: rotateX(-90deg) translateZ(80px); }
+} */
+
+
+/* .hero-cube {
+  width: 360px;
+  height: 360px;
+}
+
+@media (max-width: 768px) {
+  .hero-cube {
+    width: 280px;
+    height: 280px;
+  }
+} */
+/* @media (max-width: 1200px) {
+  #cubeContainer,
+#heroCubeH{
+  width: 400px;
+  height: 400px;
+}
+} */
+/* 
+#cubeContainer,
+#heroCubeH {
+  width: min(500px, 80vw);
+  height: min(500px, 80vw);
+} */
+
+
+/* @media (max-width: 1200px) {
+  .main-text span{
+    font-size: 3.75rem; 
+  line-height: 1;
+  font-weight: 900;
+  }
+  .highlight-text{
+    font-size: 4.5rem;
+  }
+} */

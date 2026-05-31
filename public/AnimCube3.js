@@ -171,6 +171,7 @@ function AnimCube3(params) {
     [0, 1, 2, 3, 4, 5, 6, 7, 8]  // L +36
   ];
 
+
   function onModuleLoad() {
     var fname = getParameter("config");
     if (fname == null)
@@ -2883,6 +2884,27 @@ function AnimCube3(params) {
   function exists(s) {
     try { return typeof eval(s) } catch { return false }
   }
+
+
+
+  // 👑 ADD THIS RIGHT HERE BEFORE THE CLOSING BRACE OF AnimCube3:
+  // window.playCubeMoves = function(id, movesString) {
+  //   if (id === parNode.id) {
+  //     // 1. Inject the Kociemba moves directly into this instance's local variable array
+  //     move = movesString; 
+      
+  //     // 2. Parse the new moves sequence string into internal structural arrays
+  //     initMove(); 
+      
+  //     // 3. Set the layout frame index back to the beginning of the sequence
+  //     curMove = 0; 
+      
+  //     // 4. Fire AnimCube's native rendering frame thread loop to start playback automatically
+  //     startAnimation(0); 
+  //   }
+  // };
+
+
 
   init0();
 }

@@ -23,7 +23,7 @@ const SELECTABLE_COLORS = [
 const createInitialCubeMap = (size) => {
   const totalStickers = size * size * 6;
   // Initialize every sticker to a neutral color or default layout mapping index
-  return Array(totalStickers).fill('0'); 
+  return Array(totalStickers).fill('0');
 };
 
 function SolverPage() {
@@ -92,7 +92,7 @@ function SolverPage() {
 
       <main className="max-w-7xl mx-auto px-6 py-12 min-h-screen flex flex-col justify-center">
         <div className="grid lg:grid-cols-12 gap-8 items-start">
-          
+
           {/* Left Panel: Options & Selections */}
           <div className="lg:col-span-4 space-y-6">
             <div className="space-y-2">
@@ -108,7 +108,7 @@ function SolverPage() {
             </div>
 
             <div className="bg-[#111622] border border-slate-800/60 rounded-2xl p-5 shadow-xl space-y-5">
-              
+
               {/* Option Size Selection */}
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
@@ -153,13 +153,12 @@ function SolverPage() {
                       <button
                         key={color.id}
                         onClick={() => setActivePaintColor(color)}
-                        className={`group relative flex flex-col items-center gap-1.5 p-2.5 rounded-xl border transition-all text-xs font-medium ${
-                          isBrushActive 
-                            ? 'bg-[#171E2E] border-slate-600' 
+                        className={`group relative flex flex-col items-center gap-1.5 p-2.5 rounded-xl border transition-all text-xs font-medium ${isBrushActive
+                            ? 'bg-[#171E2E] border-slate-600'
                             : 'bg-[#090D16]/60 border-slate-800/60 hover:border-slate-700'
-                        }`}
+                          }`}
                       >
-                        <span 
+                        <span
                           className="w-5 h-5 rounded-md block shadow-inner border border-black/20"
                           style={{ backgroundColor: color.hex }}
                         />
@@ -184,7 +183,7 @@ function SolverPage() {
               <button className="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold px-4 py-3 rounded-xl shadow-lg shadow-orange-500/10 transition-all active:scale-[0.98] flex items-center justify-center gap-2 text-sm">
                 <Cpu className="w-4 h-4" /> Compute Solution
               </button>
-              <button 
+              <button
                 onClick={handleResetCube}
                 className="bg-slate-800/40 hover:bg-slate-800 text-slate-300 border border-slate-700/50 font-medium px-4 py-3 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 text-sm"
               >
@@ -198,12 +197,12 @@ function SolverPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-6 block self-start">
               3. Flat Texture Input Editor Map
             </span>
-            
+
             {/* Flat net visual layout schema representing unfolded 3D model */}
             <div className="flex flex-col items-center gap-2 select-none">
-              
+
               {/* Up Face Grid Matrix Block */}
-              <div 
+              <div
                 className="grid gap-1 bg-slate-900/60 p-1 border border-slate-800 rounded-lg"
                 style={{ gridTemplateColumns: `repeat(${selectedSize}, minmax(0, 1fr))` }}
               >
@@ -212,8 +211,8 @@ function SolverPage() {
                   const currentThemeCode = cubeStateMap[baseIdx];
                   const hexMatch = SELECTABLE_COLORS.find(c => c.charCode === currentThemeCode)?.hex || '#1e293b';
                   return (
-                    <button 
-                      key={`U-${i}`} 
+                    <button
+                      key={`U-${i}`}
                       onClick={() => handleStickerClick(baseIdx)}
                       className="w-7 h-7 rounded-sm border border-black/40 transition-transform active:scale-90"
                       style={{ backgroundColor: hexMatch }}
@@ -226,7 +225,7 @@ function SolverPage() {
               <div className="flex gap-2">
                 {/* Loop 4 sides across lateral axis */}
                 {['L', 'F', 'R', 'B'].map((side, sideIdx) => (
-                  <div 
+                  <div
                     key={side}
                     className="grid gap-1 bg-slate-900/60 p-1 border border-slate-800 rounded-lg"
                     style={{ gridTemplateColumns: `repeat(${selectedSize}, minmax(0, 1fr))` }}
@@ -237,8 +236,8 @@ function SolverPage() {
                       const currentThemeCode = cubeStateMap[baseIdx];
                       const hexMatch = SELECTABLE_COLORS.find(c => c.charCode === currentThemeCode)?.hex || '#1e293b';
                       return (
-                        <button 
-                          key={`${side}-${i}`} 
+                        <button
+                          key={`${side}-${i}`}
                           onClick={() => handleStickerClick(baseIdx)}
                           className="w-7 h-7 rounded-sm border border-black/40 transition-transform active:scale-90"
                           style={{ backgroundColor: hexMatch }}
@@ -250,7 +249,7 @@ function SolverPage() {
               </div>
 
               {/* Down Face Grid Matrix Block */}
-              <div 
+              <div
                 className="grid gap-1 bg-slate-900/60 p-1 border border-slate-800 rounded-lg"
                 style={{ gridTemplateColumns: `repeat(${selectedSize}, minmax(0, 1fr))` }}
               >
@@ -259,8 +258,8 @@ function SolverPage() {
                   const currentThemeCode = cubeStateMap[baseIdx];
                   const hexMatch = SELECTABLE_COLORS.find(c => c.charCode === currentThemeCode)?.hex || '#1e293b';
                   return (
-                    <button 
-                      key={`D-${i}`} 
+                    <button
+                      key={`D-${i}`}
                       onClick={() => handleStickerClick(baseIdx)}
                       className="w-7 h-7 rounded-sm border border-black/40 transition-transform active:scale-90"
                       style={{ backgroundColor: hexMatch }}
@@ -270,7 +269,7 @@ function SolverPage() {
               </div>
 
             </div>
-            
+
             <p className="text-[11px] text-slate-500 mt-6 text-center leading-relaxed">
               Tap tiles above using your active brush color to reproduce your physical cube configuration.
             </p>
@@ -279,7 +278,7 @@ function SolverPage() {
           {/* Right Column: Dynamic WebGL Canvas 3D Preview Window */}
           <div className="lg:col-span-4 flex justify-center items-center relative">
             <div className="relative w-full aspect-square bg-gradient-to-b from-[#121824] to-[#0E131F] border border-slate-800 rounded-2xl p-4 shadow-2xl flex items-center justify-center group overflow-hidden">
-              
+
               {/* Corner Accent Design Details */}
               <div className="absolute top-3 left-3 w-1.5 h-1.5 border-t border-l border-slate-700" />
               <div className="absolute top-3 right-3 w-1.5 h-1.5 border-t border-r border-slate-700" />
@@ -287,8 +286,8 @@ function SolverPage() {
               <div className="absolute bottom-3 right-3 w-1.5 h-1.5 border-b border-r border-slate-700" />
 
               {/* WebGL Target Render Viewport Component */}
-              <div 
-                id="cubeViewer" 
+              <div
+                id="cubeViewer"
                 className="w-full h-full min-w-[240px] min-h-[240px] transition-transform duration-500 group-hover:scale-102"
               />
 

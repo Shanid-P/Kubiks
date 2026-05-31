@@ -1,9 +1,43 @@
 @import "tailwindcss";
 
 :root {
-  font-family: 'Poppins', system-ui, sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
+
+
+
 
 #heroCube canvas {
   background-color: transparent !important;
+}
+
+#cubeContainer,
+#heroCubeH {
+  width: 500px;
+  height: 500px;
+}
+
+
+@media (max-width: 1200px) {
+  #cubeContainer,
+  #heroCubeH {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  #cubeContainer,
+  #heroCubeH {
+    width: 320px;
+    height: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  #cubeContainer,
+  #heroCubeH {
+    width: 250px;
+    height: 250px;
+  }
 }

@@ -38,31 +38,32 @@ const algorithmsData = [
 
 const Algorithms = () => {
   return (
-    <div id="learn" className="w-full bg-[#0B0F19] py-24 relative overflow-hidden">
+    <div id="learn" className="w-full relative overflow-hidden bg-[#0B0F19] text-white py-16 lg:py-24 px-5 sm:px-8 md:px-15">
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-white/[0.02] to-transparent pointer-events-none" />
-      
+
       <main className="max-w-7xl mx-auto px-5 relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+        <div className="flex flex-col lg:flex-row items-start justify-between lg:items-end mb-16 gap-6">
           <div className="flex flex-col gap-3">
-            <h2 className="text-sm tracking-[0.2em] font-bold text-gray-400 uppercase">Algorithm Database</h2>
-            <h1 className="text-5xl md:text-6xl font-black text-white uppercase tracking-tighter">
+            <h2 className="text-xs md:text-sm tracking-[0.25em] font-bold text-gray-400 uppercase">Algorithm Database</h2>
+            <h1 className="mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase leading-[0.95] tracking-tight">
               Learn the
-               {/* <span className="text-[#FF5800]">Moves</span>. */}
-                <span className=''>
+              {/* <span className="text-[#FF5800]">Moves</span>. */}
+              <span className=''>
                 <span className="text-yellow-400"> M</span>
                 <span className="text-red-500">O</span>
                 <span className="text-blue-500">V</span>
                 <span className="text-green-500">E</span>
-                <span className="text-orange-500">S </span>
-            </span>
-            .
+                <span className="text-orange-500">S</span>
+                <span className="text-white">.</span>
+              </span>
+              
             </h1>
             <p className="text-gray-400 mt-2 max-w-xl text-lg font-medium">
               Access our comprehensive library of speedcubing algorithms. From beginner basics to full CFOP, we have every sequence you need to reach sub-10.
             </p>
           </div>
-          
+
           <button className="flex-shrink-0 bg-white/10 hover:bg-white/20 border border-white/10 text-white font-bold uppercase tracking-widest px-8 py-4 rounded-lg transition-all hover:scale-[1.02]">
             View Full Library
           </button>
@@ -70,8 +71,8 @@ const Algorithms = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
           {algorithmsData.map((alg) => (
-            <div 
-              key={alg.id} 
+            <div
+              key={alg.id}
               className={`p-8 rounded-2xl border transition-all duration-300 cursor-pointer group ${alg.color}`}
             >
               <div className="flex justify-between items-start mb-6">
@@ -82,15 +83,15 @@ const Algorithms = () => {
                   {alg.count}
                 </span>
               </div>
-              
+
               <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-3">
                 {alg.title}
               </h3>
-              
+
               <p className="text-gray-400 font-medium leading-relaxed">
                 {alg.desc}
               </p>
-              
+
               <div className="mt-8 flex items-center gap-2 text-sm font-bold text-white uppercase tracking-widest group-hover:text-[#FF5800] transition-colors">
                 Start Learning <span className="text-[#FF5800] text-lg leading-none">&gt;</span>
               </div>

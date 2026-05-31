@@ -17,15 +17,15 @@ self.onmessage = (e) => {
     const cube = Cube.fromString(state);
 
     const SOLVED_STATE =
-  "UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB";
+      "UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB";
 
-let solution;
+    let solution;
 
-if (state === SOLVED_STATE) {
-  solution = " ";
-} else {
-  solution = cube.solve();
-}
+    // if (state === SOLVED_STATE) {
+    //   solution = " ";
+    // } else {
+      solution = cube.solve();
+    // }
 
     self.postMessage({
       success: true,

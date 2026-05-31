@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, Play } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Navbar from './Navbar';
 
 
 //  “Dark Neural Lab” (Best for a premium tech feel)
@@ -50,32 +52,24 @@ const Hero = () => {
     script.async = true;
 
     script.onload = () => {
-      if (window.AnimCube3) {
-        const moves = generateRandomMoves(15);
+        if (window.AnimCube3) {
+          const moves = generateRandomMoves(15);
 
-        // FIX 1: Use bgcolor=ffffff00 AND add &transparent=1
-        // FIX 2: Added 'repeat=1' and 'speed=20' for auto-rotation
-        const params = `id=heroCube
-      &demo=${moves}
-      &repeat=1
-      &speed=18
-      &buttonbar=0
-      &bgcolor=ffffff00
-      &transparent=1`;
+          // FIX 1: Use bgcolor=ffffff00 AND add &transparent=1
+          // FIX 2: Added 'repeat=1' and 'speed=20' for auto-rotation
+          const params = `id=heroCubeH
+            &demo=${moves}
+            &repeat=1
+            &speed=18
+            &buttonbar=0
+            &bgcolor=ffffff00
+            &transparent=1`;
 
-        window.AnimCube3(params);
-
-        // window.AnimCube3(`
-        //   id=heroCube
-        //   &move=${moves}
-        //   &repeat=1
-        //   &speed=18
-        //   &buttonbar=0
-        //   &bgcolor=000000
-        // `);
-
-      }
-    };
+          window.AnimCube3(params);
+          // Ensure body overflow remains scrollable to allow button interactions
+          document.body.style.overflow = 'auto';
+        }
+      };
 
     document.body.appendChild(script);
 
@@ -91,180 +85,181 @@ const Hero = () => {
 
   return (
     <div className="min-h-screen bg-[#0B0F19] text-white selection:bg-orange-500/30">
-      {/* Navigation */}
-      <nav className=" flex items-center justify-around px-8 py-6 w-full mx-auto fixed top-0 left-0 w-full z-50">
-        <div className="flex items-center gap-1 group cursor-pointer justify-center">
-          <img className='h-12' src="/assets/logo image.png" alt="" />
-          <img className='h-10' src="/assets/logo txt.png" alt="" />
-        </div>
-
-        <div className=" hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
-          {['Home', 'Solver', 'Learn', 'Timer', 'Tutorials', 'About'].map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-white transition-colors">
-              {item}
-            </a>
-          ))}
-        </div>
-
-        <button 
-         onClick={() => navigate('/solve')}
-        className=" bg-[#FF5800] hover:bg-[#e64f00] text-black text-xs font-bold px-6 py-2.5 rounded-sm uppercase tracking-widest transition-all">
-          Solve Now
-        </button>
-      </nav>
-
+      
+      <Navbar/>
       {/* Hero Content */}
-      <div className="flex flex-col items-center pt-20">
+      <div className=" w-full flex flex-col items-center">
 
-    
-      <main className="max-w-7xl mx-auto px-5 grid lg:grid-cols-3 items-center gap-12 pt-14 pb-10">
 
-        {/* Left Text Content */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-8"
-        >
-          <h1 className="">
-            <span className=" text-6xl md:text-6xl font-black leading-[0.9] tracking-tighter uppercase">Stuck <br />on your <br />
-              <span className='text-8xl'>
-                <span className="text-yellow-400">C</span>
-                <span className="text-red-500">U</span>
-                <span className="text-blue-500">B</span>
-                <span className="text-green-500">E </span>
-                <span className="text-orange-500">?</span>
+        <main className="mx-auto w-full lg:px-30 md:px-20 px-10 flex lg:flex-row flex-col items-center mx-auto items-center justify-between pt-14 pb-10">
+
+          {/* Left Text Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
+          >
+            <h1 className="main-text text-center lg:text-start">
+              <span className="text-5xl sm:text-6xl lg:text-5xl xl:text-6xl font-black leading-[0.9] tracking-tighter uppercase">Stuck on your <br />
+                <span className='highlight-text text-6xl sm:text-8xl lg:text-7xl xl:text-8xl'>
+                  <span className="text-yellow-400">C</span>
+                  <span className="text-red-500">U</span>
+                  <span className="text-blue-500">B</span>
+                  <span className="text-green-500">E </span>
+                  <span className="text-orange-500">?</span>
                 </span>
-            </span>
-            {/* <br />
+
+
+                {/* <span className="text-6xl md:text-6xl font-black leading-[0.9] tracking-tighter uppercase"> */}
+                <br />
+                We've
+                got the 
+                <br/>
+                <span className="text-6xl sm:text-6xl lg:text-6xl xl:text-7xl">Moves</span>
+                
+                
+                {/* <span className='text-8xl'>
+                  <span className="text-yellow-400">M</span>
+                  <span className="text-red-500">O</span>
+                  <span className="text-blue-500">V</span>
+                  <span className="text-green-500">E </span>
+                  <span className="text-orange-500">S </span>
+                </span> */}
+              {/* </span> */}
+
+              </span>
+              {/* <br />
             <span className="text-6xl md:text-6xl font-black leading-[0.9] tracking-tighter uppercase">
               We've got the <span className="text-7xl">moves</span>.
             </span> */}
-          </h1>
+            </h1>
 
-          <p className="max-w-md text-gray-400 text-lg leading-relaxed font-medium">
-            Master the Rubik's Cube instantly with our powerful algorithmic solver.
-            Solve any scrambled 3x3 in under 20 moves. Start now!
-          </p>
+            <p className="max-w-md text-gray-400 text-lg leading-relaxed font-medium text-center lg:text-start">
+              Master the Rubik's Cube instantly with our powerful algorithmic solver. 
+              Solve any scrambled 3x3 in under 20 moves. Start now!
+            </p>
 
-          <div className="flex flex-wrap gap-4 pt-4">
-            <button className="flex items-center gap-2 bg-[#FF5800] hover:bg-[#e64f00] text-black font-bold px-8 py-4 rounded-sm transition-all group">
-              START SOLVING NOW
-              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
+            <div className="flex flex-wrap gap-4 pt-2 w-full items-center md:justify-start justify-center">
+              <button className="flex items-center gap-2 bg-[#FF5800] hover:bg-[#e64f00] text-black font-bold px-8 py-4 rounded-sm transition-all group">
+                START SOLVING NOW
+                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
 
-            {/* <button className="flex items-center gap-2 border border-white/20 hover:bg-white/5 px-8 py-4 rounded-sm transition-all">
+              <button className="flex items-center gap-2 border border-white/20 hover:bg-white/5 px-8 py-4 rounded-sm transition-all">
               LEARN THE ALGORITHMS
-            </button> */}
-          </div>
+            </button>
+            </div>
 
-        </motion.div>
+          </motion.div>
 
-        {/* Right 3D Visual (Mockup) */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="relative  self-baseline"
-        >
-          {/* Subtle Glow Background */}
-          {/* <div className="absolute inset-0 bg-blue-500/10 blur-[120px] rounded-full" /> */}
-          <div className="absolute w-[500px] h-[500px]
+          {/* Right 3D Visual (Mockup) */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="relative  self-baseline self-center mt-12 lg:mt-0"
+          >
+            {/* Subtle Glow Background */}
+            {/* <div className="absolute inset-0 bg-blue-500/10 blur-[120px] rounded-full" /> */}
+            <div className="absolute w-full h-[500px]
                   rounded-full
                   bg-blue-500/20
                   blur-3xl
                   animate-pulse" />
 
-          {/* The Cube Image/Element */}
-          <div className="relative z-10 flex justify-center items-center ">
-            {/* <img 
+            {/* The Cube Image/Element */}
+            <div className="relative z-10 flex justify-center items-center ">
+              {/* <img 
                src="/path-to-your-cube-render.png" 
                alt="3D Rubik's Cube" 
                className="w-full max-w-lg drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] rotate-12 hover:rotate-0 transition-transform duration-700"
              /> */}
-            {/* <video src="/assets/cube-animation.mp4"></video> */}
+              {/* <video src="/assets/cube-animation.mp4"></video> */}
 
 
-            <div style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: '500px',
-              // background: 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%)'
-            }}
-              className='relative z-20 '>
-              <div
-                id="heroCube"
-                className='relative z-20'
-                ref={cubeRef}
-                style={{ width: '500px', height: '500px' }}
-              ></div>
-            </div>
+              <div 
+              id='cubeContainer'
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                // height: '500px',
+                // background: 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%)'
+              }}
+                className='relative z-20 '>
+                <div
+                  id="heroCubeH"
+                  className='relative z-20'
+                  ref={cubeRef}
+                  // style={{ width: '500px', height: '500px' }}
+                ></div>
+              </div>
 
-            {/* Floating Decorative Elements */}
-            {/* <div className="absolute -bottom-10 -right-10 w-24 h-24 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 flex items-center justify-center animate-bounce">
+              {/* Floating Decorative Elements */}
+              {/* <div className="absolute -bottom-10 -right-10 w-24 h-24 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 flex items-center justify-center animate-bounce">
               <Play className="text-[#FF5800] fill-[#FF5800] w-8 h-8" />
             </div> */}
-          </div>
-        </motion.div>
+            </div>
+          </motion.div>
 
 
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-8 justify-end"
-        >
+          {/* <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8 justify-end"
+          >
 
 
-          <h1 className="text-right">
-            
-            <span className="text-6xl md:text-6xl font-black leading-[0.9] tracking-tighter uppercase">
-              We've <br />
-              got the 
-              <br />
-              {/* <span className="text-7xl">moves</span>. */}
-              <span className='text-8xl'>
-                <span className="text-yellow-400">M</span>
-                <span className="text-red-500">O</span>
-                <span className="text-blue-500">V</span>
-                <span className="text-green-500">E </span>
-                <span className="text-orange-500">S </span>
+            <h1 className="text-right">
+
+              <span className="text-6xl md:text-6xl font-black leading-[0.9] tracking-tighter uppercase">
+                We've <br />
+                got the
+                <br />
+                
+                <span className='text-8xl'>
+                  <span className="text-yellow-400">M</span>
+                  <span className="text-red-500">O</span>
+                  <span className="text-blue-500">V</span>
+                  <span className="text-green-500">E </span>
+                  <span className="text-orange-500">S </span>
                 </span>
-            </span>
-          </h1>
+              </span>
+            </h1>
 
 
-<p className="max-w-md text-gray-400 text-lg leading-relaxed font-medium text-right">
-            Master the Rubik's Cube instantly with our powerful algorithmic solver.
-            Solve any scrambled 3x3 in under 20 moves. Start now!
-          </p>
+            <p className="max-w-md text-gray-400 text-lg leading-relaxed font-medium text-right">
+              Master the Rubik's Cube instantly with our powerful algorithmic solver.
+              Solve any scrambled 3x3 in under 20 moves. Start now!
+            </p>
 
 
-<button className="flex items-center justify-self-end gap-2 border border-white/20 hover:bg-white/5 px-8 py-4 rounded-sm transition-all">
+            <button className="flex items-center justify-self-end gap-2 border border-white/20 hover:bg-white/5 px-8 py-4 rounded-sm transition-all">
               LEARN THE ALGORITHMS
             </button>
 
-        </motion.div>
-        
-      </main>
-      {/* Color Palette Preview */}
-          <div className="flex items-center gap-4 pt-8 border-t border-white/5">
-            <div className="flex -space-x-2">
-              {['#C41E3A', '#FF5800', '#FFD500', '#009E60', '#0051BA', '#FFFFFF'].map((color, i) => (
-                <div
-                  key={i}
-                  className="w-8 h-8 rounded-full border-2 border-[#121212]"
-                  style={{ backgroundColor: color }}
-                />
-              ))}
-            </div>
-            <span className="text-xs text-gray-500 uppercase tracking-widest font-bold">Your Choice Always Matters</span>
+          </motion.div> */}
+
+        </main>
+        {/* Color Palette Preview */}
+        <div className="flex items-center justify-center gap-4 pt-8 border-t border-white/5 w-[80%]">
+          <div className="flex -space-x-2">
+            {['#C41E3A', '#FF5800', '#FFD500', '#009E60', '#0051BA', '#FFFFFF'].map((color, i) => (
+              <div
+                key={i}
+                className="w-8 h-8 rounded-full border-2 border-[#121212]"
+                style={{ backgroundColor: color }}
+              />
+            ))}
           </div>
-          </div>
+          <span className="text-xs text-gray-500 uppercase tracking-widest font-bold">Your Choice Always Matters</span>
+        </div>
+      </div>
 
 
-          {/* <div className="solver-section">
+      {/* <div className="solver-section">
 
           </div>
           <div className="patterns">

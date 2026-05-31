@@ -8,7 +8,7 @@ export default function CubePlayer() {
   useEffect(() => {
     const player = new TwistyPlayer({
       puzzle: "3x3x3",
-    //   alg: "R U R' U'",
+      //   alg: "R U R' U'",
       controlPanel: "none",
       background: "none",
     });

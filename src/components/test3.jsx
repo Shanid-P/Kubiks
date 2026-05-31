@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-// import { motion, transform } from "framer-motion";
+import { motion, transform } from "framer-motion";
 import { Layers, RotateCcw, Cpu, Palette, CheckCircle2 } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -11,9 +11,6 @@ import { TwistyPlayer } from "cubing/twisty";
 
 
 import CubePlayer from "./CubePlayer";
-
-import { Link } from "react-router-dom";
-
 
 // import Cube from "cubejs";
 
@@ -104,7 +101,6 @@ let faceletColor;
 function SolverPage() {
   const [isSelected, setSelectedSize] = useState();
   const [activeColor, setActivePaintColor] = useState();
-  const [text, setText] = useState("Load Solution");
 
   //   const [colorCode, setColorCode] = useState([
   //   ['G','G','G','G','G','G','G','G','G'], //f
@@ -259,10 +255,10 @@ function SolverPage() {
 
   const handleAnimate = () => {
     // Animate the solution moves using AnimCube3
-    // if (!solution) {
-    //   console.warn('No solution to animate');
-    //   return;
-    // }
+    if (!solution) {
+      console.warn('No solution to animate');
+      return;
+    }
     // Pass the full solution string to renderCube; AnimCube3 will animate sequentially
     renderCube(solution);
   };
@@ -291,8 +287,6 @@ function SolverPage() {
     //   L: data.L,
     //   R: data.B,
     // };
-
-    //  let  moves = solution;
 
     const container = document.getElementById("heroCube");
 
@@ -325,12 +319,7 @@ function SolverPage() {
 
     
 
-    window.AnimCube3(params);
-
-
-    // handleAnimate();
-
-    document.body.style.overflow = 'auto';
+    window.myCube = AnimCube3(params);
 
     // window.myCube.playAnimation();
 
@@ -557,7 +546,7 @@ function SolverPage() {
 
         workerRef.current.postMessage(state);
 
-        // renderCube(solution);
+
 
       } catch (err) {
 
@@ -597,9 +586,10 @@ function SolverPage() {
 
       const data = e.data;
 
-            if (data.success) {
+      if (data.success) {
+
         setSolution(data.solution || "Already solved");
-        renderCube(data.solution || "Already solved");
+
       } else {
 
         setSolution("Invalid cube state");
@@ -653,45 +643,14 @@ function SolverPage() {
   }, [colorCode]);
 
   return (
-    <div className="min-h-screen bg-[#080B11] text-slate-100 antialiased selection:bg-orange-500/30 overflow-x-hidden w-full  pt-20">
+    <div className="min-h-screen bg-[#080B11] text-slate-100 antialiased selection:bg-orange-500/30">
       {/* Visual background atmospheric elements */}
-
-      {/* Navigation */}
-      <nav className=" flex items-center justify-around px-8 py-6 w-full mx-auto fixed top-0 left-0 w-full z-50">
-        <div className="flex items-center gap-1 group cursor-pointer justify-center">
-          <img className='h-12' src="/assets/logo image.png" alt="" />
-          <img className='h-10' src="/assets/logo txt.png" alt="" />
-        </div>
-
-        <div className=" hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
-          {['Home', 'Solver', 'Learn', 'Timer', 'Tutorials', 'About'].map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-white transition-colors">
-              {item}
-            </a>
-          ))}
-        </div>
-
-        {/* <button
-          onPointerDown={() => navigate('/')}
-          className=" bg-[#FF5800] hover:bg-[#e64f00] text-black text-xs font-bold px-6 py-2.5 rounded-sm uppercase tracking-widest transition-all">
-          Home
-        </button> */}
-        <Link
-  to="/"
-  className="bg-[#FF5800] hover:bg-[#e64f00] text-black text-xs font-bold px-6 py-2.5 rounded-sm uppercase tracking-widest transition-all"
->
-  Home
-</Link>
-      </nav>
-
-
-
-      <div className="absolute top-0 left-0 w-full h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-50 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
       {/* <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" /> */}
 
       <main className="max-w-7xl mx-auto px-6 py-12 min-h-screen flex flex-col justify-center items-center">
-        <div className="flex gap-6 lg:flex-row  flex-col lg:items-start w-full items-center">
-          <div className=" space-y-6 lg:w-[50%] items-center w-[80%]">
+        <div className="grid lg:grid-cols-15 gap-6 items-start">
+          <div className="col-span-6 space-y-6">
             <div className="flex flex-col items-baseline">
               <span className="text-xs font-bold tracking-widest text-orange-500 uppercase bg-orange-500/10 px-3 py-1 rounded-full">
                 Custom your Cube
@@ -812,71 +771,80 @@ function SolverPage() {
               </div>
             </div>
           </div>
-            <div className="lg:px-15 py-5 lg:w-[50%] w-[100%] h-full text-center flex flex-col items justify-center overflow-hidden">
+          <div className="col-span-9 space-y-6 px-15 py-5  h-full text-center flex flex-col items justify-center">
             <span className="text-sm text-slate-400">3D Cube</span>
-            <div className="relative flex justify-center items-center w-full h-[90%] mt-5 overflow-visible">
+            <div className="relative z-10 flex justify-center items-center w-full h-[90%]  mt-5">
               <div
-                 onPointerDown={() => {
-                  console.log("t")
+                onClick={() =>
                   setRotation((prev) => ({
                     ...prev,
                     x: prev.x - 90,
                   }))
                 }
-                 }
-                className="absolute top-0 z-40 bg-[#090D16] px-4 py-4 rounded-xl border border-slate-800/40 text-white cursor-pointer"
+                className="absolute top-0 bg-[#090D16] px-4 py-4 rounded-xl border border-slate-800/40 text-white"
               >
                 <FontAwesomeIcon icon="angle-up" />
               </div>
 
               <div
-                 onPointerDown={() =>{
-                  console.log("b");
+                onClick={() =>
                   setRotation((prev) => ({
                     ...prev,
                     x: prev.x + 90,
                   }))
                 }
-                }
-                className="absolute bottom-0 z-40 bg-[#090D16] px-4 py-4 rounded-xl border border-slate-800/40 text-white hover:cursor-pointer"
+                className="absolute bottom-0 bg-[#090D16] px-4 py-4 rounded-xl border border-slate-800/40 text-white"
               >
                 <FontAwesomeIcon icon="angle-down" />
               </div>
 
               <div
-                 onPointerDown={() =>{
-                  console.log("l");
+                onClick={() =>
                   setRotation((prev) => ({
                     ...prev,
                     y: prev.y + 90,
                   }))
                 }
-                }
-                className="absolute left-0 z-40 bg-[#090D16] px-4 py-4 rounded-xl border border-slate-800/40 text-white cursor-pointer"
+                className="absolute left-0 bg-[#090D16] px-4 py-4 rounded-xl border border-slate-800/40 text-white"
               >
                 <FontAwesomeIcon icon="angle-left" />
               </div>
 
               <div
-                 onPointerDown={() =>{
-                  console.log("r")
+                onClick={() =>
                   setRotation((prev) => ({
                     ...prev,
                     y: prev.y - 90,
                   }))
                 }
-              }
-                className="absolute right-0 z-40 bg-[#090D16] px-4 py-4 rounded-xl border border-slate-800/40 text-white cursor-pointer"
+                className="absolute right-0 bg-[#090D16] px-4 py-4 rounded-xl border border-slate-800/40 text-white"
               >
                 <FontAwesomeIcon icon="angle-right" />
               </div>
 
-              <div className="flex w-full py-30  z-0 items-center justify-center">
-                
+              <div className="flex w-full py-30 items-center justify-center">
+                {/* <div className="grid grid-cols-3 ">
+
+                {stickers.map(sticker => (
+    <button
+      key={sticker.id}
+      onClick={() => handleStickerClick(sticker.id)}
+      className="border border-red-500/30"
+      style={{
+        width: "90px",
+        height: "90px",
+        top: sticker.top,
+        left: sticker.left,
+      }}
+    />
+  ))}
+
+
+    </div> */}
                 <div className="scene w-50 h-50 [perspective:600px]">
                   <div className="absolute inset-0 bg-blue-400/70 blur-[120px] rounded-full" />
                   <div
-                    className={`cube relative w-full h-full [transform-style:preserve-3d] z-0 transition-transform duration-1000 ease-in-out`}
+                    className={`cube relative w-full h-full [transform-style:preserve-3d] transition-transform duration-1000 ease-in-out`}
                     style={{
                       transform: `
       rotateX(${rotation.x}deg)
@@ -922,12 +890,112 @@ function SolverPage() {
 
 
                     }
+                    {/* <div className="face back">
+                      <div className="grid grid-cols-3 w-full h-full">
+                        {stickers.map((sticker) => (
+                          <button
+                            key={sticker.id}
+                            onClick={() => {
+                              let side = 5;
+                              handleStickerClick(sticker.id, side);
+                            }}
+                            className="border border-white"
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              top: sticker.top,
+                              left: sticker.left,
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="face right">
+                      <div className="grid grid-cols-3 w-full h-full">
+                        {stickers.map((sticker) => (
+                          <button
+                            key={sticker.id}
+                            onClick={() => {
+                              let side = 1;
+                              handleStickerClick(sticker.id, side);
+                            }}
+                            className="border border-white"
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              top: sticker.top,
+                              left: sticker.left,
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="face left">
+                      <div className="grid grid-cols-3 w-full h-full">
+                        {stickers.map((sticker) => (
+                          <button
+                            key={sticker.id}
+                            onClick={() => {
+                              let side = 4;
+                              handleStickerClick(sticker.id, side);
+                            }}
+                            className="border border-white"
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              top: sticker.top,
+                              left: sticker.left,
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="face top">
+                      <div className="grid grid-cols-3 w-full h-full">
+                        {stickers.map((sticker) => (
+                          <button
+                            key={sticker.id}
+                            onClick={() => {
+                              let side = 0;
+                              handleStickerClick(sticker.id, side);
+                            }}
+                            className="border border-white"
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              top: sticker.top,
+                              left: sticker.left,
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="face bottom">
+                      <div className="grid grid-cols-3 w-full h-full">
+                        {stickers.map((sticker) => (
+                          <button
+                            key={sticker.id}
+                            onClick={() => {
+                              let side = 3;
+                              handleStickerClick(sticker.id, side);
+                            }}
+                            className="border border-white"
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              top: sticker.top,
+                              left: sticker.left,
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="flex justify-center mt-10 w-full gap-5">
+            <div className="relative flex items-center">
 
               <button
                 onClick={() => {
@@ -943,17 +1011,14 @@ function SolverPage() {
                   );
 
                 }}
-                className="bg-slate-800 hover:bg-slate-700 text-white text-sm font-bold px-5 py-2.5 rounded-sm uppercase tracking-widest transition-all"
+                className="bg-[#FF5800] hover:bg-[#e64f00] text-black text-sm font-bold px-5 py-2.5 rounded-sm uppercase tracking-widest transition-all"
               >
                 <FontAwesomeIcon icon="refresh" />
               </button>
 
               <button
-                onClick ={ () => {
-                  handleSolve();
-                  
-                }}
-                className=" bg-[#FF5800] hover:bg-[#e64f00] text-black text-sm font-bold px-6 py-2.5 rounded-sm uppercase tracking-widest transition-all"
+                onClick={handleSolve}
+                className="absolute left-1/2 -translate-x-1/2 bg-[#FF5800] hover:bg-[#e64f00] text-black text-sm font-bold px-6 py-2.5 rounded-sm uppercase tracking-widest transition-all"
               >
                 Solve Now!
               </button>
@@ -961,14 +1026,13 @@ function SolverPage() {
             </div>
 
           </div>
-
         </div>
 
 
         <div className="flex flex-col md:flex-row items-center justify-between mt-16 w-full bg-[#111622]/40 border border-slate-800/40 p-6 rounded-2xl gap-6">
                   <div className="flex flex-col gap-1 text-left">
-                    <p className="text-sm text-slate-500 font-medium text-center md:text-start">Tired of painting configurations manually?</p>
-                    <span className="text-2xl md:text-3xl font-black tracking-tight mt-1 text-center md:text-start">
+                    <p className="text-sm text-slate-500 font-medium">Tired of painting configurations manually?</p>
+                    <span className="text-2xl md:text-3xl font-black tracking-tight mt-1">
                       Scan your 
                       <span className="ml-1.5 font-extrabold">
                         <span className="text-yellow-400">C</span>
@@ -980,8 +1044,8 @@ function SolverPage() {
                     </span>
                   </div>
                   <div className="flex items-center gap-6">
-                    {window.innerWidth > 950 && ( <img src="/assets/cubeDia.png" className="w-20 object-contain opacity-70" alt="Cube Diagram" />)}
-                    <button className="bg-[#0496c7] hover:bg-[#037fa9] text-white sm:text-md text-sm  font-bold px-6 py-3 rounded transition-all whitespace-nowrap">
+                    <img src="/assets/cubeDia.png" className="w-20 object-contain opacity-70" alt="Cube Diagram" />
+                    <button className="bg-[#0496c7] hover:bg-[#037fa9] text-white text-md font-bold px-6 py-3 rounded transition-all whitespace-nowrap">
                       <FontAwesomeIcon icon="expand" className="mr-2" /> Open Scanner
                     </button>
                   </div>
@@ -992,14 +1056,14 @@ function SolverPage() {
        <div className="flex flex-col lg:flex-row w-full mt-12 justify-between gap-10">
                  <div className="flex relative flex-col w-full lg:w-[50%] items-center justify-center bg-[#111622]/30 border border-slate-800/40 rounded-2xl p-6 min-h-[460px]">
                    <div className="absolute w-[340px] h-[340px] rounded-full bg-blue-500/5 blur-3xl pointer-events-none" />
-                   <div className="relative z-20 flex flex-col items-center justify-center w-full ">
-                     <div id="heroCube" ref={cubeRef} style={{ width: '100%', maxWidth: '300px', height: '500px' }} className="relative z-20 "></div>
+                   <div className="relative z-20 flex flex-col items-center justify-center w-full">
+                     <div id="heroCube" ref={cubeRef} style={{ width: '360px', height: '360px' }} className="relative z-20"></div>
                      <p className="text-xs text-slate-500 font-medium mt-4">[ Your Live 3D Render Output Viewport ]</p>
                    </div>
                  </div>
        
-                 <div className="flex flex-col w-full lg:w-[50%] items-start py-4 ">
-                   <div className="flex flex-col gap-3 text-left w-full ">
+                 <div className="flex flex-col w-full lg:w-[50%] items-start justify-between py-4">
+                   <div className="flex flex-col gap-3 text-left w-full">
                      <p className="text-lg font-black uppercase tracking-wider text-slate-400">Computed Engine Solutions</p>
                      <div className="bg-[#050607] p-5 border border-slate-800/80 text-orange-400 rounded-xl font-mono tracking-widest text-md w-full h-44 overflow-y-auto shadow-inner">
                        {solution ? (
@@ -1013,19 +1077,14 @@ function SolverPage() {
                      <p className="text-xs text-slate-500">Methodology Framework Algorithm: Two-Phase Kociemba Solvers System</p>
                    </div>
        
-                   <div className="flex gap-4 self-start items-start justify-start w-full mt-6">
-                     {/* <button
-                       onClick={ () =>{
-                        handleAnimate();
-
-                        {solution &&  setText("Loaded Solution");}
-                       }
-                      }
+                   <div className="flex gap-4 items-center justify-start w-full mt-6">
+                     <button
+                       onClick={handleAnimate}
                        className="flex gap-2 items-center justify-center bg-[#FF5800] hover:bg-[#e64f00] text-black text-sm font-black px-6 py-3 rounded uppercase tracking-wider transition-all shadow-md"
                      >
                        <FontAwesomeIcon icon="play" />
-                       <span>{text}</span>
-                     </button> */}
+                       <span>Animate moves</span>
+                     </button>
                      <button
                        onClick={() => {
                          setSolution("");

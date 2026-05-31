@@ -136,7 +136,7 @@ export default function AlgorithmPage() {
           onClick={() => handleMoveClick(seq)}
           className="bg-[#1e90ff] hover:bg-[#1c7cd6] text-white font-medium px-4 py-2 rounded-md transition-colors"
         >
-          {/* {seq} */} SEq
+          {/* {seq} */} Seq
         </button>
 
       </div>
