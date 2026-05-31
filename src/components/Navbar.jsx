@@ -54,11 +54,11 @@ function Navbar() {
           <div className="flex items-center gap-3">
 
             <button
-              onPointerDown={() => navigate("/solve")}
-              className="bg-[#FF5800] hover:bg-[#e64f00] text-black text-[10px] md:text-xs font-bold px-4 md:px-6 py-2.5 rounded-sm uppercase tracking-widest transition-all"
-            >
-              Solve Now
-            </button>
+  onPointerDown={() => navigate("/solve")}
+  className="hidden min-[475px]:block bg-[#FF5800] hover:bg-[#e64f00] text-black text-[10px] md:text-xs font-bold px-4 md:px-6 py-2.5 rounded-sm uppercase tracking-widest transition-all"
+>
+  Solve Now
+</button>
 
             {/* Mobile Hamburger */}
             <button
@@ -81,6 +81,20 @@ function Navbar() {
         >
           <div className="px-4 pb-5 pt-2 bg-[#0B0F19]/95 backdrop-blur-xl border-t border-white/5">
             <div className="flex flex-col gap-1">
+
+
+<div className="mb-3 min-[475px]:hidden">
+  <button
+    onClick={() => {
+      navigate("/solve");
+      setMenuOpen(false);
+    }}
+    className="w-full bg-[#FF5800] hover:bg-[#e64f00] text-black text-sm font-bold py-3 rounded-lg uppercase tracking-wider"
+  >
+    Solve Now
+  </button>
+</div>
+
 
               {navItems.map((item) => (
                 <a

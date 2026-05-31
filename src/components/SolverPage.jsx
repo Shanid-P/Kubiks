@@ -671,17 +671,18 @@ function SolverPage() {
           ))}
         </div>
 
-        {/* <button
-          onPointerDown={() => navigate('/')}
+        <a
+          // onPointerDown={() => navigate('/')}
+          href="/"
           className=" bg-[#FF5800] hover:bg-[#e64f00] text-black text-xs font-bold px-6 py-2.5 rounded-sm uppercase tracking-widest transition-all">
           Home
-        </button> */}
-        <Link
+        </a>
+        {/* <Link
   to="/"
   className="bg-[#FF5800] hover:bg-[#e64f00] text-black text-xs font-bold px-6 py-2.5 rounded-sm uppercase tracking-widest transition-all"
 >
   Home
-</Link>
+</Link> */}
       </nav>
 
 

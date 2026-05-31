@@ -141,7 +141,9 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-wrap gap-4 pt-2 w-full items-center md:justify-start justify-center">
-              <button className="flex items-center gap-2 bg-[#FF5800] hover:bg-[#e64f00] text-black font-bold px-8 py-4 rounded-sm transition-all group">
+              <button 
+              onPointerDown={() => navigate("/solve")}
+              className="flex items-center gap-2 bg-[#FF5800] hover:bg-[#e64f00] text-black font-bold px-8 py-4 rounded-sm transition-all group">
                 START SOLVING NOW
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
