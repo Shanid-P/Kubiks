@@ -586,35 +586,61 @@ function SolverPage() {
 
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    workerRef.current = new Worker(
-      new URL("./CubeWorker.js", import.meta.url),
-      { type: "module" }
-    );
+    // workerRef.current = new Worker(
+    //   new URL("./CubeWorker.js", import.meta.url),
+    //   { type: "module" }
+    // );
 
-    workerRef.current.onmessage = (e) => {
+    // workerRef.current.onmessage = (e) => {
 
-      const data = e.data;
+    //   const data = e.data;
 
-            if (data.success) {
-        setSolution(data.solution || "Already solved");
-        renderCube(data.solution || "Already solved");
-      } else {
+    //         if (data.success) {
+    //     setSolution(data.solution || "Already solved");
+    //     renderCube(data.solution || "Already solved");
+    //   } else {
 
-        setSolution("Invalid cube state");
+    //     setSolution("Invalid cube state");
 
-        console.log(data.error);
+    //     console.log(data.error);
 
-      }
+    //   }
 
-    };
+    // };
 
-    return () => {
-      workerRef.current.terminate();
-    };
 
-  }, []);
+    // const workerRef = useRef(null);
+
+useEffect(() => {
+  workerRef.current = new Worker(
+    new URL("./CubeWorker.js", import.meta.url),
+    { type: "module" }
+  );
+
+  workerRef.current.onmessage = (e) => {
+    const data = e.data;
+
+    if (data.success) {
+      setSolution(data.solution || "Already solved");
+      renderCube(data.solution || "");
+    } else {
+      console.error(data.error);
+      setSolution("Invalid cube state");
+    }
+  };
+
+  return () => {
+    workerRef.current?.terminate();
+  };
+}, []);
+
+    // return () => {
+    //   workerRef.current.terminate();
+    // };
+
+  // }, []);
 
 
 
