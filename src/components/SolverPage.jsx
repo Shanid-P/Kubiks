@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-// import { motion, transform } from "framer-motion";
+import { motion, transform } from "framer-motion";
 import { Layers, RotateCcw, Cpu, Palette, CheckCircle2 } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -723,7 +723,7 @@ function SolverPage() {
                     return (
                       <button
                         key={cube.size}
-                        onClick={() => setSelectedSize(cube.size)}
+                        onPointerDown={() => setSelectedSize(cube.size)}
                         className="relative py-2 rounded-lg text-sm font-bold transition-colors"
                         style={{
                           color: isSelected == cube.size ? "#fff" : "#64748b",
@@ -768,7 +768,7 @@ function SolverPage() {
                     return (
                       <button
                         key={color.id}
-                        onClick={() => setActivePaintColor(color.id)}
+                        onPointerDown={() => setActivePaintColor(color.id)}
                         className={`group relative flex flex-col items-center gap-1.5 p-2.5 rounded-xl border transition-all text-xs font-medium ${activeColor == color.id
                           ? "bg-[#171E2E] border-slate-600"
                           : "bg-[#090D16]/60 border-slate-800/60 hover:border-slate-700"
@@ -900,7 +900,7 @@ function SolverPage() {
 
                                 <button
                                   key={sticker.id}
-                                  onClick={() => {
+                                  onPointerDown={() => {
                                     let side = face.id;
                                     handleStickerClick(sticker.id, side);
                                   }}
@@ -931,7 +931,7 @@ function SolverPage() {
             <div className="flex justify-center mt-10 w-full gap-5">
 
               <button
-                onClick={() => {
+                onPointerDown={() => {
                   setColorCode(
                     [
                       ['W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'],
@@ -950,7 +950,7 @@ function SolverPage() {
               </button>
 
               <button
-                onClick ={ () => {
+                onPointerDown ={ () => {
                   handleSolve();
                   
                 }}
