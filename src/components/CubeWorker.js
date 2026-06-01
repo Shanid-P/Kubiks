@@ -1,44 +1,40 @@
-import Cube from "cubejs";
+// Use dynamic import to correctly handle cubejs (CommonJS) in a Vite ES module worker
+let Cube = null;
 
-let initialized = false;
-
-self.onmessage = (e) => {
+self.onmessage = async (e) => {
   const state = e.data;
 
   try {
+    // Lazy-load cubejs with CJS/ESM interop support
+    if (!Cube) {
+      const mod = await import("cubejs");
+      // Handle both ESM default export and CJS module.exports
+      Cube = mod.default || mod;
 
-    if (!initialized) {
+      if (!Cube || !Cube.fromString) {
+        throw new Error("cubejs failed to load — Cube is undefined");
+      }
+
       Cube.initSolver();
-      initialized = true;
     }
 
-    // const cube = new Cube();
+    if (!state || typeof state !== "string" || state.length !== 54) {
+      throw new Error("Invalid cube state string");
+    }
 
     const cube = Cube.fromString(state);
-
-    const SOLVED_STATE =
-      "UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB";
-
-    let solution;
-
-    // if (state === SOLVED_STATE) {
-    //   solution = " ";
-    // } else {
-      solution = cube.solve();
-    // }
+    const solution = cube.solve();
 
     self.postMessage({
       success: true,
-      solution,
+      solution: solution || "",
     });
 
   } catch (err) {
-
     self.postMessage({
       success: false,
-      error: err.message,
+      error: err?.message || String(err),
     });
-
   }
 };
 
