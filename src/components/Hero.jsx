@@ -52,12 +52,12 @@ const Hero = () => {
     script.async = true;
 
     script.onload = () => {
-      if (window.AnimCube3) {
-        const moves = generateRandomMoves(15);
+        if (window.AnimCube3) {
+          const moves = generateRandomMoves(15);
 
-        // FIX 1: Use bgcolor=ffffff00 AND add &transparent=1
-        // FIX 2: Added 'repeat=1' and 'speed=20' for auto-rotation
-        const params = `id=heroCubeH
+          // FIX 1: Use bgcolor=ffffff00 AND add &transparent=1
+          // FIX 2: Added 'repeat=1' and 'speed=20' for auto-rotation
+          const params = `id=heroCubeH
             &demo=${moves}
             &repeat=1
             &speed=18
@@ -65,11 +65,11 @@ const Hero = () => {
             &bgcolor=ffffff00
             &transparent=1`;
 
-        window.AnimCube3(params);
-        // Ensure body overflow remains scrollable to allow button interactions
-        document.body.style.overflow = 'auto';
-      }
-    };
+          window.AnimCube3(params);
+          // Ensure body overflow remains scrollable to allow button interactions
+          document.body.style.overflow = 'auto';
+        }
+      };
 
     document.body.appendChild(script);
 
@@ -85,8 +85,8 @@ const Hero = () => {
 
   return (
     <div className="min-h-screen bg-[#0B0F19] text-white selection:bg-orange-500/30">
-
-      <Navbar />
+      
+      <Navbar/>
       {/* Hero Content */}
       <div className=" w-full flex flex-col items-center">
 
@@ -114,11 +114,11 @@ const Hero = () => {
                 {/* <span className="text-6xl md:text-6xl font-black leading-[0.9] tracking-tighter uppercase"> */}
                 <br />
                 We've
-                got the
-                <br />
+                got the 
+                <br/>
                 <span className="text-6xl sm:text-6xl lg:text-6xl xl:text-7xl">Moves</span>
-
-
+                
+                
                 {/* <span className='text-8xl'>
                   <span className="text-yellow-400">M</span>
                   <span className="text-red-500">O</span>
@@ -126,7 +126,7 @@ const Hero = () => {
                   <span className="text-green-500">E </span>
                   <span className="text-orange-500">S </span>
                 </span> */}
-                {/* </span> */}
+              {/* </span> */}
 
               </span>
               {/* <br />
@@ -136,21 +136,21 @@ const Hero = () => {
             </h1>
 
             <p className="max-w-md text-gray-400 text-lg leading-relaxed font-medium text-center lg:text-start">
-              Master the Rubik's Cube instantly with our powerful algorithmic solver.
+              Master the Rubik's Cube instantly with our powerful algorithmic solver. 
               Solve any scrambled 3x3 in under 20 moves. Start now!
             </p>
 
             <div className="flex flex-wrap gap-4 pt-2 w-full items-center md:justify-start justify-center">
-              <button
-                onPointerDown={() => navigate("/solve")}
-                className="flex items-center gap-2 bg-[#FF5800] hover:bg-[#e64f00] text-black font-bold px-8 py-4 rounded-sm transition-all group">
+              <button 
+              onPointerDown={() => navigate("/solve")}
+              className="flex items-center gap-2 bg-[#FF5800] hover:bg-[#e64f00] text-black font-bold px-8 py-4 rounded-sm transition-all group">
                 START SOLVING NOW
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
 
               <button className="flex items-center gap-2 border border-white/20 hover:bg-white/5 px-8 py-4 rounded-sm transition-all">
-                LEARN THE ALGORITHMS
-              </button>
+              LEARN THE ALGORITHMS
+            </button>
             </div>
 
           </motion.div>
@@ -180,21 +180,21 @@ const Hero = () => {
               {/* <video src="/assets/cube-animation.mp4"></video> */}
 
 
-              <div
-                id='cubeContainer'
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  // height: '500px',
-                  // background: 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%)'
-                }}
+              <div 
+              id='cubeContainer'
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                // height: '500px',
+                // background: 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%)'
+              }}
                 className='relative z-20 '>
                 <div
                   id="heroCubeH"
                   className='relative z-20'
                   ref={cubeRef}
-                // style={{ width: '500px', height: '500px' }}
+                  // style={{ width: '500px', height: '500px' }}
                 ></div>
               </div>
 

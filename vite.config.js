@@ -6,14 +6,12 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
 
+
+
   base: "./", // IMPORTANT for deployment
 
   worker: {
     format: "es",
-    // Ensure CJS packages like cubejs are transformed inside the worker bundle
-    rollupOptions: {
-      plugins: [],
-    },
   },
 
   optimizeDeps: {
@@ -23,7 +21,6 @@ export default defineConfig({
   build: {
     commonjsOptions: {
       include: [/cubejs/, /node_modules/],
-      transformMixedEsModules: true,
     },
   },
 })

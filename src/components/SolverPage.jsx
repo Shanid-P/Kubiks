@@ -3,20 +3,20 @@ import { motion, transform } from "framer-motion";
 import { Layers, RotateCcw, Cpu, Palette, CheckCircle2 } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// rubiks-cube-solver removed — unused and breaks production ESM bundle
+import { Solver } from "rubiks-cube-solver";
 
 
 
 import { TwistyPlayer } from "cubing/twisty";
 
 
-import CubePlayer from "./CubePlayer";
+// import CubePlayer from "./CubePlayer";
 
 import { Link } from "react-router-dom";
 
 
 // import Cube from "cubejs";
-
+import Cube from "cubejs";
 
 
 
@@ -613,6 +613,52 @@ function SolverPage() {
 
     // const workerRef = useRef(null);
 
+// useEffect(() => {
+//   workerRef.current = new Worker(
+//     new URL("./CubeWorker.js", import.meta.url),
+//     { type: "module" }
+//   );
+
+//   workerRef.current.onmessage = (e) => {
+//     const data = e.data;
+
+//     if (data.success) {
+//       setSolution(data.solution || "Already solved");
+//       // renderCube(data.solution || "");
+//     } else {
+//       console.error(data.error);
+//       setSolution("Invalid cube state");
+//     }
+//   };
+
+//   return () => {
+//     workerRef.current?.terminate();
+//   };
+// }, []);
+// undo this
+
+
+
+
+
+
+const solveCube = (state) => {
+  try {
+    Cube.initSolver?.();
+
+    const cube = Cube.fromString(state);
+    const solution = cube.solve();
+
+    setSolution(solution || "Already solved");
+    renderCube(solution || "");
+  } catch (err) {
+    console.error(err);
+    setSolution("Invalid cube state");
+  }
+};
+
+// const workerRef = useRef(null);
+
 useEffect(() => {
   workerRef.current = new Worker(
     new URL("./CubeWorker.js", import.meta.url),
@@ -620,20 +666,14 @@ useEffect(() => {
   );
 
   workerRef.current.onmessage = (e) => {
-    const data = e.data;
+    const { type, state } = e.data;
 
-    if (data.success) {
-      setSolution(data.solution || "Already solved");
-      // renderCube(data.solution || "");
-    } else {
-      console.error(data.error);
-      setSolution("Invalid cube state");
+    if (type === "SOLVE") {
+      solveCube(state);
     }
   };
 
-  return () => {
-    workerRef.current?.terminate();
-  };
+  return () => workerRef.current?.terminate();
 }, []);
 
     // return () => {
