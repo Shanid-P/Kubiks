@@ -615,7 +615,7 @@ function SolverPage() {
 
 useEffect(() => {
   workerRef.current = new Worker(
-    new URL("CubeWorker.js", import.meta.url),
+    new URL("./CubeWorker.js", import.meta.url),
     { type: "module" }
   );
 
