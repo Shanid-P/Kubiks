@@ -3,7 +3,7 @@ import { motion, transform } from "framer-motion";
 import { Layers, RotateCcw, Cpu, Palette, CheckCircle2 } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { Solver } from "rubiks-cube-solver";
+// rubiks-cube-solver removed — unused and breaks production ESM bundle
 
 
 
