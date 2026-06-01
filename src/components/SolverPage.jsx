@@ -615,7 +615,7 @@ function SolverPage() {
 
 useEffect(() => {
   workerRef.current = new Worker(
-    new URL("./CubeWorker.js", import.meta.url),
+    new URL("CubeWorker.js", import.meta.url),
     { type: "module" }
   );
 
@@ -624,7 +624,7 @@ useEffect(() => {
 
     if (data.success) {
       setSolution(data.solution || "Already solved");
-      renderCube(data.solution || "");
+      // renderCube(data.solution || "");
     } else {
       console.error(data.error);
       setSolution("Invalid cube state");
